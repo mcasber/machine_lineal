@@ -7,11 +7,16 @@ from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error
 from funciones import separa_decena
+from files.uvadf import df1
 
 BASE_DIR = os.path.dirname((os.path.abspath(__file__)))
 ruta = os.path.join(BASE_DIR, 'files', 'datos.csv')
 
 df = pd.read_csv(ruta,sep=",",header=0)
+
+#ACA JOIN OTROS DF
+df=df.merge(df1,on='fecha')
+#print(df.head())
 
 # !!!CON QUE LO QUIERO ENTRENAR!!!, creo y sumo atributos pa jugar
 df['dia']=df['fecha'].apply(lambda x : x.split('/')[0]).astype(int)
@@ -39,11 +44,11 @@ print(df.head(6))
 # Separar las características (X) y el target (y)
 X = df.drop('precio',axis=1) #defino cuales son las variables que tengo para predecir
 y = df['precio'] #defino que es lo que quiero predecir
-# Dividir los datos en entrenamiento y prueba
+# Divido los datos en entrenamiento y prueba
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 #print(X_train, X_test, y_train, y_test)
 
-# Crear y entrenar el modelo de regresión lineal
+# Creo y entreno el modelo.
 model = LinearRegression()
 model.fit(X_train, y_train)
 
@@ -52,7 +57,7 @@ y_pred = model.predict(X_test).round(5)
 # Calcular el Error Cuadrático Medio (MSE)
 mse = mean_squared_error(y_test, y_pred)
 
-print(f'El Error Cuadrático Medio (MSE) en el conjunto de prueba es: {mse:.30f}')#es razonable porque le estoy dando el atributo precio venta
+print(f'El Error Cuadrático Medio (MSE) en el conjunto de prueba es: {mse:.30f}')#
 promedio=df['precio'].mean()
 print(f'El promedio de column precio del df es: {promedio:.2f}')
 
@@ -61,7 +66,7 @@ for i in range(ejemplos):
   print(f'Prediccion Linear Regression: {y_pred[i]}, Precio real: {y_test.iloc[i]}')
 
 # Predecir el siguiente valor pasandole nuevos atributos
-entrada=[[17,6,2024,0,1,0]]
+entrada=[[1030,17,6,2024,0,1,0]]
 salida = model.predict(entrada)
 # Mostrar el valor predicho
 print(f'El valor predicho para la nueva entrada de data es: {salida[0]:.2f}')
