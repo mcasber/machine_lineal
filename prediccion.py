@@ -16,7 +16,7 @@ df = pd.read_csv(ruta,sep=",",header=0)
 
 #ACA JOIN OTROS DF
 df=df.merge(df1,on='fecha')
-#print(df.head())
+print(df.head())
 
 # !!!CON QUE LO QUIERO ENTRENAR!!!, creo y sumo atributos pa jugar
 df['dia']=df['fecha'].apply(lambda x : x.split('/')[0]).astype(int)
@@ -39,7 +39,7 @@ df['decena_3'] = df['decena'].apply(lambda x: 1 if x == 3 else 0)
 del df['decena'] #ahora elimino 'decena' para que no impacte
 
 #print(df.info())
-print(df.head(6))
+print(df.info())
 
 # Separar las características (X) y el target (y)
 X = df.drop('precio',axis=1) #defino cuales son las variables que tengo para predecir
@@ -57,7 +57,7 @@ y_pred = model.predict(X_test).round(5)
 # Calcular el Error Cuadrático Medio (MSE)
 mse = mean_squared_error(y_test, y_pred)
 
-print(f'El Error Cuadrático Medio (MSE) en el conjunto de prueba es: {mse:.30f}')#
+print(f'El Error Cuadrático Medio (MSE) en el conjunto de prueba es: {mse:.2f}')
 promedio=df['precio'].mean()
 print(f'El promedio de column precio del df es: {promedio:.2f}')
 
