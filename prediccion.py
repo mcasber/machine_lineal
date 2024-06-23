@@ -6,17 +6,18 @@ import numpy as np
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error
-from funciones import separa_decena
-from files.uvadf import df1
+from files.funciones import separa_decena
 
 BASE_DIR = os.path.dirname((os.path.abspath(__file__)))
 ruta = os.path.join(BASE_DIR, 'files', 'datos.csv')
+ruta1 = os.path.join(BASE_DIR, 'files', 'uva.csv')
 
 df = pd.read_csv(ruta,sep=",",header=0)
+df1 = pd.read_csv(ruta1,sep=",",header=0) #genero el df para tomar la data uva
 
 #ACA JOIN OTROS DF
 df=df.merge(df1,on='fecha')
-print(df.head())
+#print(df.info())
 
 # !!!CON QUE LO QUIERO ENTRENAR!!!, creo y sumo atributos pa jugar
 df['dia']=df['fecha'].apply(lambda x : x.split('/')[0]).astype(int)
@@ -25,7 +26,7 @@ df['ano']=df['fecha'].apply(lambda x : x.split('/')[2]).astype(int)
 
 del df['fecha'] #0   fecha     42 non-null     object  ----> ahora elimino esta columna porque no es un dato numerico
 
-#ACA LE ESTOY SACANDO EL ATRIBUTO CLAVE
+#ACA LE ESTOY SACANDO EL ATRIBUTO CLAVE  ----> o lo dejo para ver el comportamiento
 #df['predecir']=df['precio']*1.015 #aplico % aprox. para llegar al precio venta (el tomado como precio es compra)
 
 #creo la column decena para separar en la etapa del mes
