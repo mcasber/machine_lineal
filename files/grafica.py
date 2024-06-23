@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 BASE_DIR = os.path.dirname((os.path.abspath(__file__)))
-ruta = os.path.join(BASE_DIR, 'files', 'datos.csv')
+ruta = os.path.join(BASE_DIR,'datos.csv')
 
 df = pd.read_csv(ruta,sep=",",header=0)
 
