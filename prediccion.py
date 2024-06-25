@@ -7,10 +7,13 @@ from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error
 from files.funciones import separa_decena
+import datetime
+import csv
 
 BASE_DIR = os.path.dirname((os.path.abspath(__file__)))
 ruta = os.path.join(BASE_DIR, 'files', 'datos.csv')
 ruta1 = os.path.join(BASE_DIR, 'files', 'uva.csv')
+ruta2 = os.path.join(BASE_DIR, 'files', 'mse.csv')
 
 df = pd.read_csv(ruta,sep=",",header=0)
 df1 = pd.read_csv(ruta1,sep=",",header=0) #genero el df para tomar la data uva
@@ -71,3 +74,14 @@ entrada=[[1030,17,6,2024,0,1,0]]
 salida = model.predict(entrada)
 # Mostrar el valor predicho
 print(f'El valor predicho para la nueva entrada de data es: {salida[0]:.2f}')
+
+fecha=datetime.datetime.today().strftime('%d/%m/%y')
+def guardar_mse(fecha,mse,nombre_archivo='mse.csv'):
+    # Abrir el archivo en modo de escritura
+    with open(nombre_archivo, mode='a', newline='') as archivo_csv:
+        # Crear un escritor CSV
+        escritor_csv = csv.writer(archivo_csv, delimiter=',')
+        # Escribir la fila en el archivo CSV
+        escritor_csv.writerow([fecha,mse])
+
+guardar_mse(fecha,mse,ruta2) #por ultimo guardo el mse para ir teniendo el historial
