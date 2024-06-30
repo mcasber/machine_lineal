@@ -1,4 +1,6 @@
-#DESDE ACA DISPARO LA TAREA PROGRAMADA PARA LAS 10:00 AM
+'''Este modulo se ejecuta como tarea programada a las 10 am todos los días.
+Descarga datos de la web y los guarda en los respectivos archivos de la carpeta files, y luego ejecuta el script modelo'''
+
 from wscraping_dolar import dolar
 from wscraping_uva import uva
 import datetime
@@ -35,5 +37,5 @@ if __name__=='__main__':
             
     # Llamar al otro script para levantar un proceso
     print('Iniciando otro proceso...')
-    subprocess.Popen(['python', r'C:\Users\Mariano\Desktop\WebScraping\prediccion.py'])
+    subprocess.Popen(['python', r'C:\Users\Mariano\Desktop\WebScraping\modelo.py'])
     print('Proceso finalizado')
