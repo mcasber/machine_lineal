@@ -1,8 +1,6 @@
 import requests #para hacer una peticion a la pagina
 from bs4 import BeautifulSoup as bs #para extraer el html y analizarlo
 import datetime
-import pandas as pd
-import numpy as np
 #selenium es una libreria para hacer webscraping
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -11,7 +9,7 @@ from selenium.webdriver.common.keys import Keys
 import undetected_chromedriver as uc
 
 browser = uc.Chrome() #creo el objeto pa navegar
-url='https://dolarhoy.com/' #le paso una web 
+url='https://dolarhoy.com/' #guardo la url en una variable
 browser.get(url) #y le digo que vaya a esa web
 browser.implicitly_wait(10)
 
