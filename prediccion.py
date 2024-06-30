@@ -30,7 +30,9 @@ df['ano']=df['fecha'].apply(lambda x : x.split('/')[2]).astype(int)
 del df['fecha'] #0   fecha     42 non-null     object  ----> ahora elimino esta columna porque no es un dato numerico
 
 #ACA LE ESTOY SACANDO EL ATRIBUTO CLAVE  ----> o lo dejo para ver el comportamiento
-#df['predecir']=df['precio']*1.015 #aplico % aprox. para llegar al precio venta (el tomado como precio es compra)
+#df['predecir']=df['precio']*1.015 #aplico % para jugar y ver como se comporta el mse
+# 1.015 es aprox. para llegar al precio venta (el tomado como precio es compra)
+##!! es un escalar y la variación es siempre igual --> testeado 29/06
 
 #creo la column decena para separar en la etapa del mes
 df['decena']=df['dia'].apply(separa_decena)
@@ -42,7 +44,6 @@ df['decena_3'] = df['decena'].apply(lambda x: 1 if x == 3 else 0)
 
 del df['decena'] #ahora elimino 'decena' para que no impacte
 
-#print(df.info())
 print(df.info())
 
 # Separar las características (X) y el target (y)
@@ -61,7 +62,7 @@ y_pred = model.predict(X_test).round(5)
 # Calcular el Error Cuadrático Medio (MSE)
 mse = mean_squared_error(y_test, y_pred)
 
-print(f'El Error Cuadrático Medio (MSE) en el conjunto de prueba es: {mse:.2f}')
+print(f'El Error Cuadrático Medio (MSE) en el conjunto de prueba es: {mse:.50f}')
 promedio=df['precio'].mean()
 print(f'El promedio de column precio del df es: {promedio:.2f}')
 
@@ -70,7 +71,7 @@ for i in range(ejemplos):
   print(f'Prediccion Linear Regression: {y_pred[i]}, Precio real: {y_test.iloc[i]}')
 
 # Predecir el siguiente valor pasandole nuevos atributos
-entrada=[[1030,17,6,2024,0,1,0]]
+entrada=[[1050,29,6,2024,0,0,1]] #de incluir 'predecir' iria en indice=4
 salida = model.predict(entrada)
 # Mostrar el valor predicho
 print(f'El valor predicho para la nueva entrada de data es: {salida[0]:.2f}')

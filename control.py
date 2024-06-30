@@ -36,4 +36,4 @@ if __name__=='__main__':
     # Llamar al otro script para levantar un proceso
     print('Iniciando otro proceso...')
     subprocess.Popen(['python', r'C:\Users\Mariano\Desktop\WebScraping\prediccion.py'])
-    print('Proceso iniciado')
+    print('Proceso finalizado')
