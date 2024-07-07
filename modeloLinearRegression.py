@@ -30,30 +30,34 @@ model.fit(X_train, y_train)
 
 # Hacer predicciones en el conjunto de prueba
 y_pred = model.predict(X_test).round(5)
+print('La cantidad de datos para testear es de: ',len(y_pred))
 
 ejemplos=5
 for i in range(ejemplos):
   print(f'Prediccion Linear Regression: {y_pred[i]}, Precio real: {y_test.iloc[i]}')
 
-# Predecir el siguiente valor pasandole nuevos atributos
-entrada=[[1049,4,7,2024,1,0,0]] #de incluir 'predecir' iria en indice=4
-salida = model.predict(entrada)
-# Mostrar el valor predicho
-print(f'El valor predicho para la nueva entrada de data es: {salida[0]:.2f}')
+#Predecir el siguiente valor pasandole nuevos atributos
+#entrada=[[1049,4,7,2024,1,0,0]] #de incluir 'predecir' iria en indice=4
+#salida = model.predict(entrada)
+#print(f'El valor predicho para la nueva entrada de data es: {salida[0]:.2f}')# veo el valor predicho
 
 #Calculo el Error Cuadrático Medio (MSE), y lo guardo en un csv.
 mse = mean_squared_error(y_test, y_pred)
-print(f'El Error Cuadrático Medio (MSE) en el conjunto de prueba es: {mse:.10f}')
-promedio=df['precio'].mean()
-#print(f'El promedio de column precio del df es: {promedio:.2f}')
+print(f'El Error Cuadrático Medio (MSE) en el conjunto de prueba es: {mse:.2f}')
 
+#Armo el df con la prediccion en cada instancia y la diferencia
+df['precio2'] = model.predict(X)
+df['diferencia']=df['precio']-df['precio2']
+print(df)
+
+#Guardo el mse para ir teniendo el historial
 fecha=datetime.datetime.today().strftime('%d/%m/%y')
-def guardar_mse(fecha,mse,promedio,nombre_archivo='mse.csv'):
+def guardar_mse(fecha,mse,nombre_archivo='mse.csv'):
     # Abrir el archivo en modo de escritura
     with open(nombre_archivo, mode='a', newline='') as archivo_csv:
         # Crear un escritor CSV
         escritor_csv = csv.writer(archivo_csv, delimiter=',')
         # Escribir la fila en el archivo CSV
-        escritor_csv.writerow([fecha,mse,promedio])
+        escritor_csv.writerow([fecha,mse])
 
-guardar_mse(fecha,mse,promedio,ruta3) #por ultimo guardo el mse para ir teniendo el historial
+guardar_mse(fecha,mse,ruta3)
