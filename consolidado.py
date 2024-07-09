@@ -1,7 +1,7 @@
 '''Este modulo levanta los datos de los respectivos archivos y los une.
 Luego realiza algunos procesos para generar el set de datos final con el que se entrena el modelo.'''
 
-print('Ejecutando script consolidado.py')
+print('Ejecutando script de consolidado y preparacion de datos ----> consolidado.py')
 import os
 import pandas as pd
 from files.funciones import separa_decena

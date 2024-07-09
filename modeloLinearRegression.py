@@ -50,6 +50,8 @@ df['precio2'] = model.predict(X)
 df['diferencia']=df['precio']-df['precio2']
 print(df)
 
+df.to_csv('c:/Users/Mariano/Desktop/WebScraping/files/df_final.csv', index=False)#guardo el resultado final
+
 #Guardo el mse para ir teniendo el historial
 fecha=datetime.datetime.today().strftime('%d/%m/%y')
 def guardar_mse(fecha,mse,nombre_archivo='mse.csv'):
