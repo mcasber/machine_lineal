@@ -37,13 +37,13 @@ for i in range(ejemplos):
   print(f'Prediccion Linear Regression: {y_pred[i]}, Precio real: {y_test.iloc[i]}')
 
 #Predecir el siguiente valor pasandole nuevos atributos
-#entrada=[[1049,4,7,2024,1,0,0]] #de incluir 'predecir' iria en indice=4
-#salida = model.predict(entrada)
-#print(f'El valor predicho para la nueva entrada de data es: {salida[0]:.2f}')# veo el valor predicho
+entrada=[[1063,12,7,2024,0,1,0]] #de incluir 'predecir' iria en indice=4
+salida = model.predict(entrada)
+print(f'El valor predicho para la nueva entrada de data es: {salida[0]:.2f}')# veo el valor predicho
 
 #Calculo el Error Cuadrático Medio (MSE), y lo guardo en un csv.
 mse = mean_squared_error(y_test, y_pred)
-print(f'El Error Cuadrático Medio (MSE) en el conjunto de prueba es: {mse:.2f}')
+print(f'El Error Cuadrático Medio (MSE) en el conjunto de prueba es: {mse:.10f}')
 
 #Armo el df con la prediccion en cada instancia y la diferencia
 df['precio2'] = model.predict(X)

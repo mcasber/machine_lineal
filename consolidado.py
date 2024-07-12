@@ -43,6 +43,6 @@ del df['decena'] #ahora elimino 'decena' para que no impacte
 print(df.info())
 df.to_csv('c:/Users/Mariano/Desktop/WebScraping/files/df_consolidado.csv', index=False)#guardo el df con las actualizaciones
 
-# Llamar al otro script para levantar un proceso
+#Llamar al otro script para levantar un proceso
 print('----------> Iniciando entrenamiento del modelo')
 subprocess.Popen(['python', r'C:\Users\Mariano\Desktop\WebScraping\modeloLinearRegression.py'])

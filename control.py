@@ -1,6 +1,5 @@
 '''Este modulo se ejecuta como tarea programada a las 10 am todos los días.
 Descarga datos de la web y los guarda en los respectivos archivos de la carpeta files, y luego ejecuta el script consolidado'''
-
 from wscraping_dolar import dolar
 from wscraping_uva import uva
 import datetime
@@ -36,6 +35,5 @@ if __name__=='__main__':
     guardar_uva(fecha,uva,ruta1)
             
     # Llamar al otro script para levantar un proceso
-    print('----------> Iniciando consolidado de datos...')
+    print('----------> Iniciando script de consolidado de datos...')
     subprocess.Popen(['python', r'C:\Users\Mariano\Desktop\WebScraping\consolidado.py'])
-    print('Proceso consolidado de datos finalizado')

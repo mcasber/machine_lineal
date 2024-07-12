@@ -5,7 +5,7 @@ import plotly.express as px
 import pandas as pd
 
 BASE_DIR = os.path.dirname((os.path.abspath(__file__)))
-ruta = os.path.join(BASE_DIR,'df_final.csv')
+ruta = os.path.join(BASE_DIR,'files','df_final.csv')
 
 df = pd.read_csv(ruta,sep=",",header=0)
 #print(df.head(2))
