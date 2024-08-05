@@ -1,17 +1,16 @@
-import requests #para hacer una peticion a la pagina
+#import requests #para hacer una peticion a la pagina
 from bs4 import BeautifulSoup as bs #para extraer el html y analizarlo
 import datetime
 #selenium es una libreria para hacer webscraping
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-#para que la page web no detecte que soy un ordenador
-import undetected_chromedriver as uc
+#from selenium import webdriver
+#from selenium.webdriver.common.by import By
+#from selenium.webdriver.common.keys import Keys
+import undetected_chromedriver as uc #para que la page web no detecte que soy un ordenador
 
 browser = uc.Chrome() #creo el objeto pa navegar
 url='https://dolarhoy.com/' #guardo la url en una variable
 browser.get(url) #y le digo que vaya a esa web
-browser.implicitly_wait(10)
+#browser.implicitly_wait(10)
 
 #browser.find_element('xpath','//*[@id="didomi-notice-agree-button"]').click()# para hacer click en el boton Aceptar 
 
@@ -22,10 +21,8 @@ html=browser.page_source #con este metodo guardo en una variable el codigo html 
 soup=bs(html,'html')
 #print(f'esto es la data que bajo: \n {soup} \n y aca finaliza.')
 
-#Al terminar el proceso cierro la pestaña
-browser.close()
-#Cierro el navegador
-browser.quit()
+browser.close() #Al terminar el proceso cierro la pestaña
+browser.quit() #Cierro el navegador
 
 #Comienzo a trabajar con la data --> el proceso es siempre el mismo
 compra=soup.find('div', {'class':'val'}).text

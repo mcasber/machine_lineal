@@ -5,6 +5,7 @@ print('Ejecutando script de consolidado y preparacion de datos ----> consolidado
 import os
 import pandas as pd
 from files.funciones import separa_decena
+from files.funciones import separa_trimestre
 import subprocess
 
 BASE_DIR = os.path.dirname((os.path.abspath(__file__)))
@@ -20,8 +21,8 @@ df=df.merge(df1,on='fecha')
 
 # !!!CON QUE LO QUIERO ENTRENAR!!!, creo y sumo atributos pa jugar
 df['dia']=df['fecha'].apply(lambda x : x.split('/')[0]).astype(int)
-df['mes']=df['fecha'].apply(lambda x : x.split('/')[1]).astype(int)
-df['ano']=df['fecha'].apply(lambda x : x.split('/')[2]).astype(int)
+df['mes']=df['fecha'].apply(lambda x : x.split('/')[1]).astype(int) #esto lo podemos abrir por estacionalidad 'trimestre'
+df['ano']=df['fecha'].apply(lambda x : x.split('/')[2]).astype(int) 
 
 del df['fecha'] #0   fecha     42 non-null     object  ----> ahora elimino esta columna porque no es un dato numerico
 
@@ -32,16 +33,22 @@ del df['fecha'] #0   fecha     42 non-null     object  ----> ahora elimino esta 
 
 #creo la column decena para separar en la etapa del mes
 df['decena']=df['dia'].apply(separa_decena)
-
-#mejor creo 3 column para que no impacte el peso de si es 1, 2 o 3 ? pensar esto
+#mejor lo abro en 3 column para que no impacte el peso de si es 1, 2 o 3
 df['decena_1'] = df['decena'].apply(lambda x: 1 if x == 1 else 0)
 df['decena_2'] = df['decena'].apply(lambda x: 1 if x == 2 else 0)
 df['decena_3'] = df['decena'].apply(lambda x: 1 if x == 3 else 0)
-
 del df['decena'] #ahora elimino 'decena' para que no impacte
 
+#repito el proceso para generar el dato trimestre
+df['trimestre']=df['mes'].apply(separa_trimestre)
+df['tri_1'] = df['trimestre'].apply(lambda x: 1 if x == 1 else 0)
+df['tri_2'] = df['trimestre'].apply(lambda x: 1 if x == 2 else 0)
+df['tri_3'] = df['trimestre'].apply(lambda x: 1 if x == 3 else 0)
+df['tri_3'] = df['trimestre'].apply(lambda x: 1 if x == 4 else 0)
+del df['trimestre'] #elimino 'trimestre' para que no impacte
+
 print(df.info())
-df.to_csv('c:/Users/Mariano/Desktop/WebScraping/files/df_consolidado.csv', index=False)#guardo el df con las actualizaciones
+df.to_csv('c:/Users/Mariano/Desktop/WebScraping/files/df_consolidado.csv', index=False) #guardo el df con las actualizaciones
 
 #Llamar al otro script para levantar un proceso
 print('----------> Iniciando entrenamiento del modelo')
