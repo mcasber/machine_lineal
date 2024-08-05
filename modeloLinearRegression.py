@@ -18,11 +18,13 @@ df = pd.read_csv(ruta2,sep=",",header=0)
 
 # Aca comienzo a trabajar con el modelo:
 # Separar las características (X) y el target (y)
-X = df.drop('precio',axis=1) #defino cuales son las variables que tengo para predecir
+X = df.drop(['precio','dia','mes','ano'],axis=1) #defino cuales son las variables que tengo para predecir
+                      #04/08 saco para el entrenamiento las variables 'dia','mes','ano' porque distorcionan la data
 y = df['precio'] #defino que es lo que quiero predecir
 # Divido los datos en entrenamiento y prueba
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 #print(X_train, X_test, y_train, y_test)
+
 
 # Creo y entreno el modelo.
 model = LinearRegression()
@@ -32,14 +34,14 @@ model.fit(X_train, y_train)
 y_pred = model.predict(X_test).round(5)
 print('La cantidad de datos para testear es de: ',len(y_pred))
 
-ejemplos=5
-for i in range(ejemplos):
-  print(f'Prediccion Linear Regression: {y_pred[i]}, Precio real: {y_test.iloc[i]}')
+#ejemplos=5
+#for i in range(ejemplos):
+#  print(f'Prediccion Linear Regression: {y_pred[i]}, Precio real: {y_test.iloc[i]}')
 
 #Predecir el siguiente valor pasandole nuevos atributos
-entrada=[[1063,12,7,2024,0,1,0]] #de incluir 'predecir' iria en indice=4
-salida = model.predict(entrada)
-print(f'El valor predicho para la nueva entrada de data es: {salida[0]:.2f}')# veo el valor predicho
+#entrada=[[1065,0,1,0,0,0,1]] 
+#salida = model.predict(entrada)
+#print(f'El valor predicho para la nueva entrada de data es: {salida[0]:.2f}') # veo el valor predicho
 
 #Calculo el Error Cuadrático Medio (MSE), y lo guardo en un csv.
 mse = mean_squared_error(y_test, y_pred)

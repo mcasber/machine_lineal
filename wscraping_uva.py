@@ -1,14 +1,5 @@
-import requests #para hacer una peticion a la pagina
 from bs4 import BeautifulSoup as bs #para extraer el html y analizarlo
-import datetime
-import pandas as pd
-import numpy as np
-#selenium es una libreria para hacer webscraping
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-#para que la page web no detecte que soy un ordenador
-import undetected_chromedriver as uc
+import undetected_chromedriver as uc #para que la page web no detecte que soy un ordenador
 
 browser = uc.Chrome() #creo el objeto pa navegar
 url='https://www.bcra.gob.ar/' #le paso una web 
@@ -25,10 +16,10 @@ soup=bs(html,'html')
 browser.close()
 browser.quit()
 
-# Buscar todos los divs con align="right"
+# Buscar todos los div con align="right"
 divs = soup.find_all('div', {'align': 'right'})
 
-# Recopilar todos los valores de los divs encontrados
+# Recopilar todos los valores de los div encontrados
 valores = [div.text.strip() for div in divs]
 #for i in valores: print(i)
 
@@ -36,6 +27,4 @@ valores = [div.text.strip() for div in divs]
 uva = valores[10]
 uva = uva.replace('.', '')
 uva = float(uva.replace(',', '.'))
-
-#print(uva,'\n',type(uva))
 #print(f'el precio del uva es:$ {uva}') #\n y hoy es: {(datetime.datetime.today().strftime("%H:%M:%S--%A %d/%m/%y"))}')

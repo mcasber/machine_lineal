@@ -23,5 +23,9 @@ fig=px.line(df,x=df.index,y=['precio', 'precio2'],
             title='Relacion entre la variable precio y la prediccion/precio2',
             color_discrete_sequence=['blue', 'green'])
 fig.show()'''
-
 #print(df[60:80])
+'''
+sns.set(style='darkgrid')
+sns.scatterplot(data=df, x=df.index, y='precio', label='Precio')
+sns.scatterplot(data=df, x=df.index, y='precio2', label='Precio2')
+plt.show()'''
