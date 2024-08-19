@@ -11,6 +11,7 @@ import datetime
 import csv
 from sklearn import preprocessing
 from sklearn.ensemble import RandomForestRegressor
+from sklearn.model_selection import cross_val_score #para realizar validacion cruzada
 
 BASE_DIR = os.path.dirname((os.path.abspath(__file__)))
 ruta2 = os.path.join(BASE_DIR, 'files', 'df_consolidado.csv')
@@ -51,27 +52,41 @@ print(f'El Error Cuadrático Medio (MSE) en el conjunto de prueba es: {mse_rf:.4
 #------------------------------------------------------------------------------------------------------------
 
 # COMIENZO A GENERAR DATA
-# Hacer predicciones en el conjunto de prueba
-y_pred = model.predict(X_test).round(5)
-print('La cantidad de datos para testear es de: ',len(y_pred))
 
 #ejemplos=5
 #for i in range(ejemplos):
 #  print(f'Prediccion Linear Regression: {y_pred[i]}, Precio real: {y_test.iloc[i]}')
 
 #Predecir el siguiente valor pasandole nuevos atributos
-#entrada=[[1107,1,0,0,0,0,1]] 
-#salida = model.predict(entrada)
-#print(f'El valor predicho para la nueva entrada de data es: {salida[0]:.2f}') # veo el valor predicho
+entrada=[[1079.79,0,0,1,0,0,1]]
+salida = model_rf.predict(entrada)
+print(f'El valor predicho para la nueva entrada de data es: {salida[0]:.2f}') # veo el valor predicho
 
 #Armo el df con la prediccion en cada instancia:
-df['precio2'] = model.predict(X)
+df['precio_lr'] = model.predict(X)
 
-df['diferencia']=df['precio']-df['precio2'] #genero la variable diferencia 
-df['abs_diferencia']=abs(df['diferencia']) #tomo el valor absoluto de la diferencia
-df['porcentual_desvio']=df['abs_diferencia']/df['precio'] #para luego generar la diferencia %
+df['diferencia']=df['precio']-df['precio_lr'] #genero la variable diferencia 
+df['abs_dif_lr']=abs(df['diferencia']) #tomo el valor absoluto de la diferencia
+df['desvio%_lr']=df['abs_dif_lr']/df['precio'] #para luego generar la diferencia %
 df=df.drop(['diferencia'],axis=1) #elimino la variable diferencia que ya no la uso porque tengo e abs
+
+#------------------------------------------------------------------------------------------------------------
+#Repito con RANDOM FOREST para ir comparando
+df['precio_rf'] = model_rf.predict(X)
+
+df['diferencia']=df['precio']-df['precio_rf'] #genero la variable diferencia 
+df['abs_dif_rf']=abs(df['diferencia']) #tomo el valor absoluto de la diferencia
+df['desvio%_rf']=df['abs_dif_rf']/df['precio'] #para luego generar la diferencia %
+df=df.drop(['diferencia'],axis=1) #elimino la variable diferencia que ya no la uso porque tengo e abs
+#------------------------------------------------------------------------------------------------------------
 print(df)
+#------------------------------------------------------------------------------------------------------------
+#VALIDACION CRUZADA
+val_cruz_lr=cross_val_score(model, X_train, y_train, cv=5).mean().round(5)
+print(f'El resultado de validacion cruzada de lr es: {val_cruz_lr}')
+val_cruz_rf=cross_val_score(model_rf, X_train, y_train, cv=5).mean().round(5)
+print(f'El resultado de validacion cruzada de rf es: {val_cruz_rf}')
+#------------------------------------------------------------------------------------------------------------
 
 # GUARDO el resultado final
 df.to_csv('c:/Users/Mariano/Desktop/WebScraping/files/df_final.csv', index=False)

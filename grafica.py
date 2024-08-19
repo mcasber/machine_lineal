@@ -12,7 +12,8 @@ df = pd.read_csv(ruta,sep=",",header=0)
 
 sns.set(style='darkgrid')
 sns.lineplot(data=df, x=df.index, y='precio', label='Precio')
-sns.lineplot(data=df, x=df.index, y='precio2', label='Precio2')
+sns.lineplot(data=df, x=df.index, y='precio_lr', label='Precio_LRegression')
+sns.lineplot(data=df, x=df.index, y='precio_rf', label='Precio_RForest')
 #plt.xticks(rotation=75, fontsize=10)  # Rotar las etiquetas a 75 grados y cambiar el tamaño de la fuente
 #plt.tight_layout()  # Ajusta el diseño para que no se corten las etiquetas
 plt.show()
