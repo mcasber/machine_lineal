@@ -19,16 +19,27 @@ ruta3 = os.path.join(BASE_DIR, 'files', 'mse.csv')
 
 df = pd.read_csv(ruta2,sep=",",header=0)
 
+
+#------------------------------------------------------------------------------------------------------------
+#ESTO ES PARA VER LA CORRELACION ENTRE LAS VARIABLES:
+import seaborn as sns
+import matplotlib.pyplot as plt
+sns.heatmap(df.drop(['dia','mes','ano'],axis=1).corr(), annot=True)
+plt.show()
+
+#------------------------------------------------------------------------------------------------------------
 # COMIENZO A TRABAJAR CON EL MODELO:
 # Separar las características (X) y el target (y)
 X = df.drop(['precio','dia','mes','ano'],axis=1) #defino cuales son las variables que tengo para predecir
 y = df['precio'] #defino que es lo que quiero predecir
 
+#------------------------------------------------------------------------------------------------------------
 # Divido los datos en entrenamiento y prueba
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 #print(X_train, X_test, y_train, y_test)
 
-# Creo y entreno el modelo.
+#------------------------------------------------------------------------------------------------------------
+# Creo y entreno el modelo con LinearRegression.
 model = LinearRegression()
 model.fit(X_train, y_train)
 
@@ -58,10 +69,11 @@ print(f'El Error Cuadrático Medio (MSE) en el conjunto de prueba es: {mse_rf:.4
 #  print(f'Prediccion Linear Regression: {y_pred[i]}, Precio real: {y_test.iloc[i]}')
 
 #Predecir el siguiente valor pasandole nuevos atributos
-entrada=[[1079.79,0,0,1,0,0,1]]
+entrada=[[1143.59,1,0,0,0,0,1]]
 salida = model_rf.predict(entrada)
 print(f'El valor predicho para la nueva entrada de data es: {salida[0]:.2f}') # veo el valor predicho
 
+#------------------------------------------------------------------------------------------------------------
 #Armo el df con la prediccion en cada instancia:
 df['precio_lr'] = model.predict(X)
 
