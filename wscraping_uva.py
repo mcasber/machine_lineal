@@ -22,9 +22,13 @@ divs = soup.find_all('div', {'align': 'right'})
 # Recopilar todos los valores de los div encontrados
 valores = [div.text.strip() for div in divs]
 #for i in valores: print(i)
+print(valores)
 
 # Si sabes que el valor que buscas siempre está en una posición específica, por ejemplo el primer valor:
-uva = valores[10]
+uva = valores[11]
+#print(uva)
 uva = uva.replace('.', '')
+#print(uva)
 uva = float(uva.replace(',', '.'))
+print(uva)
 #print(f'el precio del uva es:$ {uva}') #\n y hoy es: {(datetime.datetime.today().strftime("%H:%M:%S--%A %d/%m/%y"))}')
