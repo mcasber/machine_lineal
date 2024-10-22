@@ -1,0 +1,3 @@
+Verifica la versión de Chrome instalada:
+
+Abre Chrome y ve a chrome://settings/help para ver tu versión de Chrome.

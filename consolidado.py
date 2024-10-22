@@ -44,7 +44,7 @@ df['trimestre']=df['mes'].apply(separa_trimestre)
 df['tri_1'] = df['trimestre'].apply(lambda x: 1 if x == 1 else 0)
 df['tri_2'] = df['trimestre'].apply(lambda x: 1 if x == 2 else 0)
 df['tri_3'] = df['trimestre'].apply(lambda x: 1 if x == 3 else 0)
-df['tri_3'] = df['trimestre'].apply(lambda x: 1 if x == 4 else 0)
+df['tri_4'] = df['trimestre'].apply(lambda x: 1 if x == 4 else 0)
 del df['trimestre'] #elimino 'trimestre' para que no impacte
 
 print(df.info())

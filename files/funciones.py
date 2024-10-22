@@ -16,3 +16,5 @@ def separa_trimestre(n):
         return 3
     else:
         return 4
+
+print(separa_trimestre(10))
