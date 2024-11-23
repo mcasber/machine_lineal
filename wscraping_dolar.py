@@ -5,7 +5,7 @@ import datetime
 #from selenium import webdriver
 #from selenium.webdriver.common.by import By
 #from selenium.webdriver.common.keys import Keys
-import undetected_chromedriver as uc #para que la page web no detecte que soy un ordenador
+import undetected_chromedriver as uc #para navegar * y que la page web no detecte que soy un ordenador
 
 browser = uc.Chrome() #creo el objeto pa navegar
 url='https://dolarhoy.com/' #guardo la url en una variable
