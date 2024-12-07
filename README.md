@@ -208,20 +208,20 @@ ruta3 = os.path.join(BASE_DIR, 'files', 'mse.csv')
 
 df = pd.read_csv(ruta2,sep=",",header=0)
 
-# COMIENZO A TRABAJAR CON EL MODELO:
+#COMIENZO A TRABAJAR CON EL MODELO:
 X = df.drop(['precio','dia','mes','ano'],axis=1) 
 y = df['precio'] 
 
-# Divido los datos en entrenamiento y prueba
+#Divido los datos en entrenamiento y prueba
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 print('La cantidad de datos para entrenar es de: ',len(X_train),'\n y para testear es de: ',len(X_test))
 
-# Creo y entreno el modelo con LinearRegression.
+#Creo y entreno el modelo con LinearRegression.
 model = LinearRegression()
 model.fit(X_train, y_train)
 y_pred = model.predict(X_test).round(5)
 
-# Métricas
+#Métricas
 mse = mean_squared_error(y_test, y_pred)
 rmse = mse ** 0.5
 r2 = r2_score(y_test, y_pred)
@@ -229,7 +229,7 @@ print(f'El Error Cuadrático Medio (MSE) en el conjunto de prueba es: {mse:.4f},
 val_cruz_lr=cross_val_score(model, X_train, y_train, cv=5).round(2)
 print(f'El resultado de validacion cruzada de lr es: {val_cruz_lr}')
 
-# Entreno el modelo de RANDOM FOREST para ir comparando
+#Entreno el modelo de RANDOM FOREST para ir comparando
 model_rf = RandomForestRegressor(n_estimators=800, random_state=42) #dejo n_estimators=800 que es el que mejor da de 100 a 1000
 model_rf.fit(X_train, y_train)
 y_pred_rf = model_rf.predict(X_test).round(5)
@@ -262,7 +262,7 @@ porcentaje_aciertos_lr = (df['aciertos_lr'].sum() / len(df)) * 100
 porcentaje_aciertos_rf = 100-porcentaje_aciertos_lr
 print(f"El porcentaje de mejores aproximaciones al precio real de lr: {porcentaje_aciertos_lr:.2f}% tal que rf tiene {porcentaje_aciertos_rf:.2f}%")
 
-# GUARDO el resultado final
+#GUARDO el resultado final
 df.to_csv('c:/Users/Mariano/Desktop/WebScraping/files/df_final.csv', index=False)
 
 6. **Módulo **grafica
