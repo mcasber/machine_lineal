@@ -1,0 +1,24 @@
+24/11/2024
+La cantidad de datos para entrenar es de:  821448 y para testear es de:  205362
+El Error Cuadrático Medio (MSE) en el conjunto de prueba es: 5103.8913, su raiz (RMSE): 71.4415 y r2: 0.5673 con LinearRegression
+El resultado de validacion cruzada de lr es: [0.56 0.57 0.57 0.57 0.57]
+
+La cantidad de datos para entrenar es de:  2464344 y para testear es de:  616086
+El Error Cuadrático Medio (MSE) en el conjunto de prueba es: 5118.7510, su raiz (RMSE): 71.5454 y r2: 0.5684 con LinearRegression
+El resultado de validacion cruzada de lr es: [0.57 0.57 0.57 0.57 0.57]
+
+*llevamos el df a rows 9240000 aprox.
+La cantidad de datos para entrenar es de:  7393032 y para testear es de:  1848258
+El Error Cuadrático Medio (MSE) en el conjunto de prueba es: 5119.6872, su raiz (RMSE): 71.5520 y r2: 0.5680 con LinearRegression
+El resultado de validacion cruzada de lr es: [0.57 0.57 0.57 0.57 0.57]
+
+*aumentamos considerablemente los datos y las metricas se mantienen.
+
+Escalamos para ver como impacta en el resultado:
+La cantidad de datos para entrenar es de:  7393032 y para testear es de:  1848258
+El Error Cuadrático Medio (MSE) en el conjunto de prueba es: 0.0186, su raiz (RMSE): 0.1363 y r2: 0.5680 con LinearRegression
+El resultado de validacion cruzada de lr es: [0.57 0.57 0.57 0.57 0.57]
+
+*y las metricas se mantienen
+
+Reducimos la dimensionalidad:
