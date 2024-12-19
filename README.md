@@ -7,6 +7,8 @@ Fecha de inicio: 2 de enero de 2024
 Tecnologías utilizadas: Python | Scikit-learn | Matplotlib/Seaborn | BeautifulSoup | Undetected_chromedriver | Pandas
 Bibliotecas adicionales: numpy, csv, subprocess
 
+*los notebook consolidan todo el proceso de cada modelo aplicando técnicas de escalamiento y reducción de dimensionalidad.
+
 Estructura del proyecto
 
 El proyecto está dividido en módulos principales que automatizan la recolección, procesamiento, y análisis de datos:
