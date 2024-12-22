@@ -16,6 +16,9 @@ sns.lineplot(data=df, x=df.index, y='precio_lr', label='Precio_LRegression')
 sns.lineplot(data=df, x=df.index, y='precio_rf', label='Precio_RForest')
 #plt.xticks(rotation=75, fontsize=10)  # Rotar las etiquetas a 75 grados y cambiar el tamaño de la fuente
 #plt.tight_layout()  # Ajusta el diseño para que no se corten las etiquetas
+plt.title("Evolución del precio: real, Linear Regression y Random Forest")  
+plt.xlabel("Índice")  # Cambia "Índice" por el título que desees para el eje x
+plt.ylabel("Precios") 
 plt.show()
 
 '''

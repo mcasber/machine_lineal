@@ -267,7 +267,7 @@ print(f"El porcentaje de mejores aproximaciones al precio real de lr: {porcentaj
 #GUARDO el resultado final
 df.to_csv('c:/Users/Mariano/Desktop/WebScraping/files/df_final.csv', index=False)
 
-6. **Módulo **grafica
+6. **Módulo **grafica_precios
 
 Este módulo genera visualizaciones basadas en los datos procesados y almacenados:
 
@@ -300,3 +300,7 @@ sns.lineplot(data=df, x=df.index, y='precio_rf', label='Precio_RForest')
 #plt.xticks(rotation=75, fontsize=10)  # Rotar las etiquetas a 75 grados y cambiar el tamaño de la fuente
 #plt.tight_layout()  # Ajusta el diseño para que no se corten las etiquetas
 plt.show()
+
+7. **Módulo **grafica_metricas
+
+Este módulo genera visualizaciones lineales de la evolución de la métrica rmse de los dos modelos.
