@@ -7,7 +7,7 @@ BASE_DIR = os.path.dirname((os.path.abspath(__file__)))
 ruta = os.path.join(BASE_DIR,'files','mse.csv')
 
 df = pd.read_csv(ruta,sep=",",header=0)
-print(df.info())
+print(df.describe())
 
 sns.set(style='darkgrid')
 sns.lineplot(data=df, x=df.index, y='rmse', label='LinearRegression_rmse')
