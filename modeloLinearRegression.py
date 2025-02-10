@@ -12,6 +12,7 @@ import csv
 from sklearn import preprocessing
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import cross_val_score #para realizar validacion cruzada
+import subprocess
 
 BASE_DIR = os.path.dirname((os.path.abspath(__file__)))
 ruta2 = os.path.join(BASE_DIR, 'files', 'df_consolidado.csv')
@@ -121,3 +122,7 @@ def guardar_mse(fecha,mse,rmse,mse_rf,rmse_rf,nombre_archivo='mse.csv'):
         escritor_csv.writerow([fecha,mse,rmse,mse_rf,rmse_rf])
 
 guardar_mse(fecha,mse,rmse,mse_rf,rmse_rf,ruta3)
+
+#SUBPROCESS | 
+print('----------> Iniciando script generador_data_predict')
+subprocess.Popen(['python', r'C:\Users\Mariano\Desktop\RandomForestRegressor_Modelo1\Separar_data_train_test.py'])

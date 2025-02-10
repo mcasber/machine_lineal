@@ -31,8 +31,15 @@ def guardar_uva(fecha,uva,nombre_archivo='uva.csv'):
 
 if __name__=='__main__':
 
-    guardar_dolar(fecha,dolar,ruta)
-    guardar_uva(fecha,uva,ruta1)
+    try:
+        guardar_dolar(fecha,dolar,ruta)
+        guardar_uva(fecha,uva,ruta1)
+    except:
+        print('Fallo algo en la descarga de info de la web')
+    else:
+        print('El proceso de webscraping y actualizacion de archivos se realizo con exito')
+    finally:
+        print('Thank you')
             
     # Llamar al otro script para levantar un proceso
     print('----------> Iniciando script de consolidado de datos...')
